@@ -1,37 +1,42 @@
-import Character from '../Character.js';
-import Daemon from '../Daemon.js';
+import Character from '../Character';
+import Bowman from '../Bowman';
 
-describe('to have create an object Character or throw the error', () => {
-  test('to have create an object with object Daemon', () => {
-    const result = new Character('Nemo', 'Daemon');
-    const expected = {
-      name: 'Nemo',
-      type: 'Daemon',
-      health: 100,
-      level: 1,
-    };
-    expect(result).toEqual(expected);
-  });
+test('should class name === string', () => {
+  const hero = new Character('archer');
+  expect(hero.name).toBe('archer');
+});
 
-  test('to have throw error if the name of the object is not a string', () => {
-    const expected = 'Ошибка! Имя должно быть строкой длиной от 2 до 10 символов!';
-    expect(() => new Character(22, 'Daemon')).toThrowError(expected);
-  });
+test('should class error', () => {
+  expect(() => new Character(5)).toThrow('Такого героя не существует');
+});
 
-  test('to have throw error if the name of the object is longer than 10 characters', () => {
-    const expected = 'Ошибка! Имя должно быть строкой длиной от 2 до 10 символов!';
-    expect(() => new Character('DemonNewDemon', 'Daemon')).toThrowError(expected);
-  });
+test('should lavel up', () => {
+  const archer = new Bowman('archer');
+  archer.levelUp();
+  const expected = {
+    name: 'archer',
+    health: 100,
+    level: 2,
+    type: 'Bowman',
+    attack: 30,
+    defence: 30,
+  };
+  expect(archer).toEqual(expected);
+});
 
-  test('to have throw error if the name of the object is less than 2 characters', () => {
-    const expected = 'Ошибка! Имя должно быть строкой длиной от 2 до 10 символов!';
-    expect(() => new Character('N', 'Daemon')).toThrowError(expected);
-  });
+test('should level up error', () => {
+  const hero = new Character('hero', 0);
+  expect(() => hero.levelUp()).toThrow('Нельзя повысить левел умершего');
+});
 
-  test('to have throw error if the hero type is wrong', () => {
-    const expected = 'Ошибка! Такого героя нет!';
-    expect(() => new Character('Nemo', 'Daemon2')).toThrowError(expected);
-  });
+test('should valid damage', () => {
+  const archer = new Bowman('arher');
+  archer.damage(10);
+  expect(archer.health).toBeCloseTo(92.5);
+});
 
- 
+test('should damage if health === 0', () => {
+  const archer = new Bowman('arher', -10);
+  archer.damage(10);
+  expect(archer.health).toBeCloseTo(-10);
 });

@@ -1,8 +1,8 @@
-import './heroes/Character.js';
-import './heroes/Boweman.js';
-import './heroes/Swordsman.js';
-import './heroes/Magician.js';
-import './heroes/Undead.js';
-import './heroes/Zombie.js';
-import './heroes/Daemon.js';
+import './heroes/Character';
+import './heroes/Bowman';
+import './heroes/Swordsman';
+import './heroes/Magician';
+import './heroes/Undead';
+import './heroes/Zombie';
+import './heroes/Daemon';
 import './style.css';
